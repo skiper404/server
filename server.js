@@ -4,8 +4,8 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 
 dotenv.config();
-const url = process.env.MONGO_URL;
-const port = process.env.PORT;
+const url = `mongodb+srv://skiper:X224314pqRr@skiper.brcz3.mongodb.net/?retryWrites=true&w=majority&appName=Skiper`;
+const port = 3000;
 
 const app = express();
 app.use(cors());
@@ -15,6 +15,10 @@ const client = new MongoClient(url);
 client.connect();
 const appsCollection = client.db('todo').collection('apps');
 const tasksCollection = client.db('todo').collection('tasks');
+
+app.get('/', async (req, res) => {
+  res.send('Base URL (It work`s)');
+});
 
 app.get('/api/apps', async (req, res) => {
   try {
