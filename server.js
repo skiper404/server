@@ -9,13 +9,13 @@ const url = process.env.MONGO_URL;
 const port = process.env.PORT;
 
 const app = express();
-app.use(cors({ origin: '*' }));
+app.use(cors());
 app.use(express.json());
 
 const client = new MongoClient(url);
 
 const start = async () => {
-  client.connect();
+  await client.connect();
   const appsCollection = client.db('todo').collection('apps');
   const tasksCollection = client.db('todo').collection('tasks');
 
